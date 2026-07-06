@@ -8,6 +8,7 @@ from app.models.assistant import (
 )
 from app.models.intent import IntentDetection
 from app.services.conversation_memory import conversation_memory
+from app.services.department_routing_service import route_complaint_payload
 from app.services.gemini_service import classify_complaint
 from app.services.intent_service import detect_intent
 from app.services.rag_service import answer_municipal_question
@@ -62,7 +63,12 @@ def _route_by_intent(
 ) -> dict[str, Any]:
     """Route a message to the capability selected by intent detection."""
     if intent.intent == "complaint":
-        return classify_complaint(message)
+        classification = classify_complaint(message)
+        routing = route_complaint_payload(classification)
+        return {
+            **classification,
+            "routing": _serialize_model(routing),
+        }
 
     if intent.intent == "question":
         return answer_municipal_question(message)
@@ -81,6 +87,14 @@ def _summarize_result(result: dict[str, Any]) -> str:
         return summary
 
     return str(result)
+
+
+def _serialize_model(model: Any) -> dict[str, Any]:
+    """Serialize a Pydantic model across supported Pydantic versions."""
+    if hasattr(model, "model_dump"):
+        return model.model_dump()
+
+    return model.dict()
 
 
 def _serialize_history(session_id: str) -> list[ConversationMessageResponse]:

@@ -2,8 +2,11 @@ from fastapi import FastAPI, HTTPException
 from app.services.gemini_service import classify_complaint
 from app.models.assistant import AssistantRequest, AssistantResponse
 from app.models.chat import ChatRequest
+from app.models.classification import ComplaintClassification
 from app.models.rag import AskRequest, AskResponse
+from app.models.routing import DepartmentRoute
 from app.services.assistant_service import handle_assistant_message
+from app.services.department_routing_service import route_complaint
 from app.services.rag_service import answer_municipal_question
 
 app = FastAPI(title="CityPulse AI")
@@ -47,3 +50,11 @@ def assistant(request: AssistantRequest):
         raise HTTPException(status_code=400, detail=str(exc)) from exc
     except RuntimeError as exc:
         raise HTTPException(status_code=500, detail=str(exc)) from exc
+
+
+@app.post("/route", response_model=DepartmentRoute)
+def route(request: ComplaintClassification):
+    try:
+        return route_complaint(request)
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
