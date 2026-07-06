@@ -1,0 +1,11 @@
+Road Repair Policy
+
+Potholes classified as High Priority must be repaired within 48 hours.
+
+Medium Priority:
+Within 5 days.
+
+Low Priority:
+Within 14 days.
+
+Emergency road collapse should immediately be escalated to the Disaster Management Department.

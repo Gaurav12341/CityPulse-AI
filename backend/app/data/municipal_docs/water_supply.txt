@@ -1,0 +1,13 @@
+Water Supply Information
+
+Normal supply timing:
+
+Morning:
+6 AM - 9 AM
+
+Evening:
+6 PM - 8 PM
+
+Pipeline leakage complaints are handled by the Water Department.
+
+Critical leakage affecting traffic should be marked as High Severity.

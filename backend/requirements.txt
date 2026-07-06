@@ -5,3 +5,8 @@ google-cloud-aiplatform
 python-dotenv
 pydantic
 httpx
+langchain-core
+langchain-text-splitters
+sentence-transformers
+faiss-cpu
+numpy
