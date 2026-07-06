@@ -1,0 +1,17 @@
+.env
+*.env
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+app/data/faiss_index/
+
+venv/
+.venv/
+env/
+
+.git/
+.gitignore
+README.md

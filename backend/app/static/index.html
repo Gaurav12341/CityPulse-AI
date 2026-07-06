@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CityPulse AI</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <aside class="sidebar" aria-label="CityPulse summary">
+        <div class="brand">
+          <div class="brand-mark" aria-hidden="true">CP</div>
+          <div>
+            <h1>CityPulse AI</h1>
+            <p>Municipal assistant</p>
+          </div>
+        </div>
+
+        <section class="status-panel" aria-label="System status">
+          <div>
+            <span class="status-dot"></span>
+            <span>Hybrid agent online</span>
+          </div>
+          <p>Routes complaints, answers civic questions, and tracks session history.</p>
+        </section>
+
+        <section class="metric-grid" aria-label="Available capabilities">
+          <div>
+            <span>01</span>
+            <strong>Complaints</strong>
+            <small>Classify and route incidents</small>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>Knowledge</strong>
+            <small>Answer from municipal docs</small>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>Routing</strong>
+            <small>SLA and officer assignment</small>
+          </div>
+        </section>
+
+        <section class="session-card" aria-label="Current session">
+          <span>Session</span>
+          <code id="sessionId">New session</code>
+        </section>
+      </aside>
+
+      <section class="workspace" aria-label="Assistant workspace">
+        <header class="workspace-header">
+          <div>
+            <h2>City operations inbox</h2>
+            <p>Ask a policy question or report a civic issue in one place.</p>
+          </div>
+          <a href="/docs" target="_blank" rel="noreferrer">API docs</a>
+        </header>
+
+        <div class="quick-actions" aria-label="Example prompts">
+          <button type="button" data-prompt="When is garbage collected in Ward 12?">
+            Ward 12 garbage schedule
+          </button>
+          <button type="button" data-prompt="There is a huge pothole near MG Road causing accidents every day.">
+            Report pothole
+          </button>
+          <button type="button" data-prompt="Who handles water leakage complaints?">
+            Water department query
+          </button>
+        </div>
+
+        <section id="conversation" class="conversation" aria-live="polite">
+          <article class="message assistant-message">
+            <div class="message-label">CityPulse</div>
+            <div class="message-body">
+              Send a complaint or a municipal question. I will detect the intent and route it through the right backend agent.
+            </div>
+          </article>
+        </section>
+
+        <form id="assistantForm" class="composer">
+          <label class="sr-only" for="messageInput">Message</label>
+          <textarea
+            id="messageInput"
+            rows="3"
+            placeholder="Type a complaint or municipal question..."
+            required
+          ></textarea>
+          <button id="sendButton" type="submit">Send</button>
+        </form>
+      </section>
+    </main>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>

@@ -1,4 +1,8 @@
+from pathlib import Path
+
 from fastapi import FastAPI, HTTPException
+from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 from app.services.gemini_service import classify_complaint
 from app.models.assistant import AssistantRequest, AssistantResponse
 from app.models.chat import ChatRequest
@@ -11,10 +15,13 @@ from app.services.rag_service import answer_municipal_question
 
 app = FastAPI(title="CityPulse AI")
 
+STATIC_DIR = Path(__file__).resolve().parent / "static"
+app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
+
 
 @app.get("/")
 def root():
-    return {"message": "CityPulse AI is running!"}
+    return FileResponse(STATIC_DIR / "index.html")
 
 
 @app.get("/health")
